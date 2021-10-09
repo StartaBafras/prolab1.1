@@ -1,14 +1,29 @@
 #include <stdio.h>
 
 int indexDosyasiOlustur();
+
 int indexDosyasiniGoster();
 
+void  kayitEkle();
 
 typedef struct kayit{
     int ogrNo;
     int dersKodu;
     int puan;
 }kayit;
+
+
+
+int main(void)
+{
+    indexDosyasiOlustur();
+
+    indexDosyasiniGoster();
+
+    kayitEkle();
+}
+
+
 
 int indexDosyasiniGoster()
 {
@@ -125,9 +140,3 @@ void kayitEkle(){
     fclose(fp);
 }
 
-int main(void)
-{
-    indexDosyasiOlustur();
-    indexDosyasiniGoster();
-    kayitEkle();
-}
