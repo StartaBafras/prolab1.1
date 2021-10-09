@@ -4,7 +4,7 @@ int indexDosyasiOlustur();
 
 int indexDosyasiniGoster();
 
-void  kayitEkle();
+int kayitEkle();
 
 typedef struct kayit{
     int ogrNo;
@@ -20,7 +20,7 @@ int main(void)
 
     indexDosyasiniGoster();
 
-    //kayitEkle();
+    kayitEkle();
 }
 
 
@@ -122,7 +122,7 @@ int indexDosyasiOlustur()
 
 }
 
-void kayitEkle(){
+int kayitEkle(){
     kayit student;
 
     printf("Ogrenci no giriniz: ");
@@ -137,7 +137,7 @@ void kayitEkle(){
       printf("Dosya acma hatasi!");
       return 1;
   }
-    fprintf(fp,"\n%d)%d)%d",student.ogrNo,student.dersKodu,student.puan);
+    fprintf(fp,"%d)%d)%d\n",student.ogrNo,student.dersKodu,student.puan);
     fclose(fp);
 
     indexDosyasiOlustur();
