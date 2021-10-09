@@ -4,21 +4,11 @@ int indexDosyasiOlustur();
 int indexDosyasiniGoster();
 
 
-typedef struct
-{
+typedef struct ogrenci{
     int ogrNo;
     int dersKodu;
     int puan;
-
-}kayit;
-
-int main(void)
-{
-    indexDosyasiOlustur();
-    indexDosyasiniGoster();
-    kayitEkle();
-}
-
+};
 
 int indexDosyasiniGoster()
 {
@@ -119,18 +109,25 @@ int indexDosyasiOlustur()
 }
 
 void kayitEkle(){
+    struct ogrenci o;
     printf("Ogrenci no giriniz: ");
-    scanf("%d",&kayit.ogrNo);
+    scanf("%d",&o.ogrNo);
     printf("Ders kodunu giriniz: ");
-    scanf("%d",&kayit.dersKodu);
+    scanf("%d",&o.dersKodu);
     printf("Puani giriniz: ");
-    scanf("%d",&kayit.puan);
+    scanf("%d",&o.puan);
     FILE *fp = fopen("index.txt","a");
-    if ((fp = fopen ("indexd.txt", "a")) == NULL) {
+    if ((fp = fopen ("index.txt", "a")) == NULL) {
       printf("Dosya acma hatasi!");
       exit(1);
   }
-    fprintf(fp,"\n%d)%d)%d",kayit.ogrNo,kayit.dersKodu,kayit.puan);
+    fprintf(fp,"\n%d)%d)%d",o.ogrNo,o.dersKodu,o.puan);
     fclose(fp);
 }
 
+int main(void)
+{
+    indexDosyasiOlustur();
+    indexDosyasiniGoster();
+    kayitEkle();
+}
