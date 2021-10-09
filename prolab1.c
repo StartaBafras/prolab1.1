@@ -124,19 +124,23 @@ int indexDosyasiOlustur()
 }
 
 void kayitEkle(){
-    kayit o;
+    kayit student;
+
     printf("Ogrenci no giriniz: ");
-    scanf("%d",&o.ogrNo);
+    scanf("%d",&student.ogrNo);
     printf("Ders kodunu giriniz: ");
-    scanf("%d",&o.dersKodu);
+    scanf("%d",&student.dersKodu);
     printf("Puani giriniz: ");
-    scanf("%d",&o.puan);
-    FILE *fp = fopen("index.txt","a");
-    if ((fp = fopen ("index.txt", "a")) == NULL) {
+    scanf("%d",&student.puan);
+
+    FILE *fp = fopen("students.bin","ab");
+    if ((fp = fopen ("students.bin", "ab")) == NULL) {
       printf("Dosya acma hatasi!");
-      exit(1);
+      return 1;
   }
-    fprintf(fp,"\n%d)%d)%d",o.ogrNo,o.dersKodu,o.puan);
+    fprintf(fp,"\n%d)%d)%d",student.ogrNo,student.dersKodu,student.puan);
     fclose(fp);
+
+    indexDosyasiOlustur();
 }
 
