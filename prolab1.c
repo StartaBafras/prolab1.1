@@ -4,11 +4,11 @@ int indexDosyasiOlustur();
 int indexDosyasiniGoster();
 
 
-typedef struct ogrenci{
+typedef struct kayit{
     int ogrNo;
     int dersKodu;
     int puan;
-};
+}kayit;
 
 int indexDosyasiniGoster()
 {
@@ -109,7 +109,7 @@ int indexDosyasiOlustur()
 }
 
 void kayitEkle(){
-    struct ogrenci o;
+    kayit o;
     printf("Ogrenci no giriniz: ");
     scanf("%d",&o.ogrNo);
     printf("Ders kodunu giriniz: ");
