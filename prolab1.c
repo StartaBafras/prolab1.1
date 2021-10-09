@@ -123,23 +123,23 @@ int indexDosyasiOlustur()
 }
 
 int kayitEkle(){
-    kayit student;
+    kayit student; //Struct yapýmýzý student ismiyle kullandýk
 
-    printf("Ogrenci no giriniz: ");
+    printf("Ogrenci no giriniz: "); //kullanicidan ogrenciye ait bilgileri aldik
     scanf("%d",&student.ogrNo);
     printf("Ders kodunu giriniz: ");
     scanf("%d",&student.dersKodu);
     printf("Puani giriniz: ");
     scanf("%d",&student.puan);
 
-    FILE *fp = fopen("students.bin","ab");
-    if ((fp = fopen ("students.bin", "ab")) == NULL) {
+    FILE *fp = fopen("students.bin","ab");  //binary dosyamizi ekleme yapma modunda actik
+    if ((fp = fopen ("students.bin", "ab")) == NULL) { //dosya acilamazsa ekrana hata gösterdik
       printf("Dosya acma hatasi!");
       return 1;
   }
-    fprintf(fp,"%d)%d)%d\n",student.ogrNo,student.dersKodu,student.puan);
+    fprintf(fp,"%d)%d)%d\n",student.ogrNo,student.dersKodu,student.puan); //Dosyamizin sonuna kullanýcý tarafindan girilen bilgileri yazdik
     fclose(fp);
 
-    indexDosyasiOlustur();
+    indexDosyasiOlustur(); //yaptigimiz eklemenin index dosyasinda sirali sekilde gozukmesi icin index dosyasini tekrar olusturduk.
 }
 
