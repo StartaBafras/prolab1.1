@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 int indexDosyasiOlustur();
+int indexDosyasiniGoster();
 
 
 typedef struct
@@ -14,9 +15,26 @@ typedef struct
 int main(void)
 {
     indexDosyasiOlustur();
+    indexDosyasiniGoster();
 }
 
 
+int indexDosyasiniGoster()
+{
+    FILE *file = fopen("index.txt","r");
+
+    if(file == NULL) return 1;
+
+    int data[2];
+
+    while (!feof(file))
+    {
+        fscanf(file,"%d)%d",&data[0],&data[1]);
+        printf("Anahtar: %d Buffer: %d \n",data[0],data[1]);
+    }
+    
+
+}
 
 int indexDosyasiOlustur()
 {
@@ -92,6 +110,7 @@ int indexDosyasiOlustur()
         fprintf(dosya,"%d)%d\n",data[i][0],data[i][3]);
     }
     
+    fclose(dosya);
     
     return 0;
     
