@@ -27,7 +27,7 @@ int main(void)
 
 int indexDosyasiniGoster()
 {
-    FILE *file = fopen("index.bin","rb");
+    FILE *file = fopen("index.txt","r");
 
     if(file == NULL) return 1;
 
@@ -47,7 +47,7 @@ int indexDosyasiOlustur()
 
 
 
-    FILE *file = fopen("students.txt","r");
+    FILE *file = fopen("students.bin","rb");
 
 
     if (file == NULL)  return 1;
@@ -106,7 +106,7 @@ int indexDosyasiOlustur()
     }
 
 
-    FILE *dosya = fopen("index.bin","wb");
+    FILE *dosya = fopen("index.txt","w");
 
 
     if (file == NULL)  return 1;
@@ -119,7 +119,6 @@ int indexDosyasiOlustur()
     fclose(dosya);
 
     return 0;
-
 
 }
 
