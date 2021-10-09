@@ -9,13 +9,14 @@ typedef struct
     int ogrNo;
     int dersKodu;
     int puan;
-    
+
 }kayit;
 
 int main(void)
 {
     indexDosyasiOlustur();
     indexDosyasiniGoster();
+    kayitEkle();
 }
 
 
@@ -32,17 +33,17 @@ int indexDosyasiniGoster()
         fscanf(file,"%d)%d",&data[0],&data[1]);
         printf("Anahtar: %d Buffer: %d \n",data[0],data[1]);
     }
-    
+
 
 }
 
 int indexDosyasiOlustur()
 {
 
-    
+
 
     FILE *file = fopen("students.bin","rb");
-    
+
 
     if (file == NULL)  return 1;
 
@@ -56,19 +57,19 @@ int indexDosyasiOlustur()
 
     rewind(file);
 
-    
+
     int data[caunter-1][4];
-    
+
     caunter = 0;
     int konum;
     while (!feof(file))
-    {   
+    {
         konum = ftell(file);
         data[caunter][3] = ftell(file);
         fscanf(file,"%d)%d)%d",&data[caunter][0],&data[caunter][1],&data[caunter][2]);
         caunter++;
     }
-    
+
     fclose(file);
 
     int swap[4];
@@ -101,18 +102,35 @@ int indexDosyasiOlustur()
 
 
     FILE *dosya = fopen("index.txt","w");
-   
-    
+
+
     if (file == NULL)  return 1;
-    
+
     for(int i=0;i<caunter-1;i++)
     {
         fprintf(dosya,"%d)%d\n",data[i][0],data[i][3]);
     }
-    
+
     fclose(dosya);
-    
+
     return 0;
-    
+
 
 }
+
+void kayitEkle(){
+    printf("Ogrenci no giriniz: ");
+    scanf("%d",&kayit.ogrNo);
+    printf("Ders kodunu giriniz: ");
+    scanf("%d",&kayit.dersKodu);
+    printf("Puani giriniz: ");
+    scanf("%d",&kayit.puan);
+    FILE *fp = fopen("index.txt","a");
+    if ((fp = fopen ("indexd.txt", "a")) == NULL) {
+      printf("Dosya acma hatasi!");
+      exit(1);
+  }
+    fprintf(fp,"\n%d)%d)%d",kayit.ogrNo,kayit.dersKodu,kayit.puan);
+    fclose(fp);
+}
+
