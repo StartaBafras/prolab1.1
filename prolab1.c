@@ -20,7 +20,7 @@ int main(void)
 
     indexDosyasiniGoster();
 
-    kayitEkle();
+    //kayitEkle();
 }
 
 
@@ -119,7 +119,6 @@ int indexDosyasiOlustur()
     fclose(dosya);
 
     return 0;
-
 
 }
 
