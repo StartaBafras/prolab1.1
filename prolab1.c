@@ -20,14 +20,14 @@ int main(void)
 
     indexDosyasiniGoster();
 
-    kayitEkle();
+    //kayitEkle();
 }
 
 
 
 int indexDosyasiniGoster()
 {
-    FILE *file = fopen("index.txt","r");
+    FILE *file = fopen("index.bin","rb");
 
     if(file == NULL) return 1;
 
@@ -47,7 +47,7 @@ int indexDosyasiOlustur()
 
 
 
-    FILE *file = fopen("students.bin","rb");
+    FILE *file = fopen("students.txt","r");
 
 
     if (file == NULL)  return 1;
@@ -106,7 +106,7 @@ int indexDosyasiOlustur()
     }
 
 
-    FILE *dosya = fopen("index.txt","w");
+    FILE *dosya = fopen("index.bin","wb");
 
 
     if (file == NULL)  return 1;
