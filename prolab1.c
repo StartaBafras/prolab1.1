@@ -6,6 +6,8 @@ int indexDosyasiniGoster();
 
 int kayitEkle();
 
+void indeksDosyasiniSil();
+
 typedef struct kayit{
     int ogrNo;
     int dersKodu;
@@ -22,6 +24,8 @@ int main(void)
     indexDosyasiniGoster();
 
     kayitEkle();
+
+    //indeksDosyasiniSil();
 }
 
 
@@ -37,7 +41,7 @@ int indexDosyasiniGoster()
     while (!feof(file))
     {
         fscanf(file,"%d)%d",&data[0],&data[1]);
-        printf("Anahtar: %d Buffer: %d \n",data[0],data[1]); 
+        printf("Anahtar: %d Buffer: %d \n",data[0],data[1]);
     }
 
 
@@ -107,7 +111,7 @@ int indexDosyasiOlustur()
     }
 
 
-    FILE *dosya = fopen("index.txt","w"); 
+    FILE *dosya = fopen("index.txt","w");
 
 
     if (file == NULL)  return 1;
@@ -144,3 +148,27 @@ int kayitEkle(){
     indexDosyasiOlustur(); //yaptigimiz eklemenin index dosyasinda sirali sekilde gozukmesi icin index dosyasini tekrar olusturduk.
 }
 
+void indeksDosyasiniSil(){
+
+    char secim;
+
+    printf("Index dosyasini silmek istediginize emin misiniz?(Bu islem geri alinamaz!!!)\n")
+    printf("Seciminiz evet ise E, Hayir ise H yaziniz.")
+    scanf("%c",&secim)
+
+    if (secim == E)
+        {
+        if (remove("index.txt") == 0)
+        {
+            printf("Dosya basarili bir sekilde silindi");
+        }
+        else
+        {
+            printf("Dosya silinemedi");
+        }
+
+    else if(secim == H)
+        {
+        break;
+        }
+    }
