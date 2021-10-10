@@ -150,13 +150,13 @@ int kayitEkle(){
 
 void indeksDosyasiniSil(){
 
-    char secim;
+    int secim;
 
     printf("Index dosyasini silmek istediginize emin misiniz?(Bu islem geri alinamaz!!!)\n");
-    printf("Seciminiz evet ise E, Hayir ise H yaziniz.");
-    scanf("%c",&secim);
+    printf("Seciminiz evet ise 1, Hayir ise 0 yaziniz.");
+    scanf("%d",&secim);
 
-    if (secim == E)
+    if (secim == 1)
         {
         if (remove("index.txt") == 0)
         {
@@ -166,9 +166,10 @@ void indeksDosyasiniSil(){
         {
             printf("Dosya silinemedi");
         }
-
-    else if(secim == H)
+        }
+    else if(secim == 0)
         {
-        break;
+        return 0;
         }
     }
+
