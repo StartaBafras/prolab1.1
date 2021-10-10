@@ -152,9 +152,9 @@ void indeksDosyasiniSil(){
 
     char secim;
 
-    printf("Index dosyasini silmek istediginize emin misiniz?(Bu islem geri alinamaz!!!)\n")
-    printf("Seciminiz evet ise E, Hayir ise H yaziniz.")
-    scanf("%c",&secim)
+    printf("Index dosyasini silmek istediginize emin misiniz?(Bu islem geri alinamaz!!!)\n");
+    printf("Seciminiz evet ise E, Hayir ise H yaziniz.");
+    scanf("%c",&secim);
 
     if (secim == E)
         {
