@@ -8,6 +8,8 @@ int kayitEkle();
 
 void indeksDosyasiniSil();
 
+int veriDosyasiniGoster();
+
 typedef struct kayit{
     int ogrNo;
     int dersKodu;
@@ -21,11 +23,13 @@ int main(void)
 {
     indexDosyasiOlustur();
 
-    indexDosyasiniGoster();
+    //indexDosyasiniGoster();
 
-    kayitEkle();
+    //kayitEkle();
 
     //indeksDosyasiniSil();
+
+    veriDosyasiniGoster();
 }
 
 
@@ -173,3 +177,22 @@ void indeksDosyasiniSil(){
         }
     }
 
+
+int veriDosyasiniGoster()
+{
+    FILE *file = fopen("students.bin","rb");
+
+    if(file == NULL) return 1;
+
+    kayit student;
+
+    while (!feof(file))
+    {
+        fscanf(file,"%d)%d)%d",&student.ogrNo,&student.dersKodu,&student.puan);
+        printf("Ogrenci No: %d Ders Kodu: %d Puanı: %d\n",student.ogrNo,student.dersKodu,student.puan);
+    }
+
+    return 0;
+
+
+}
