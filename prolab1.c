@@ -6,7 +6,7 @@ int indexDosyasiniGoster();
 
 int kayitEkle();
 
-void indeksDosyasiniSil();
+int indeksDosyasiniSil();
 
 int veriDosyasiniGoster();
 
@@ -25,9 +25,9 @@ int main(void)
 
     indexDosyasiniGoster();
 
-    //kayitEkle();
+    kayitEkle();
 
-    //indeksDosyasiniSil();
+    indeksDosyasiniSil();
 
     veriDosyasiniGoster();
 }
@@ -156,7 +156,7 @@ int kayitEkle(){
     indexDosyasiOlustur(); //yaptigimiz eklemenin index dosyasinda sirali sekilde gozukmesi icin index dosyasini tekrar olusturduk.
 }
 
-void indeksDosyasiniSil(){
+int indeksDosyasiniSil(){
 
     int secim;
 
@@ -196,7 +196,7 @@ int veriDosyasiniGoster()
         printf("Ogrenci No: %d Ders Kodu: %d Puanı: %d\n",student.ogrNo,student.dersKodu,student.puan);
     }
 
-    close(file);
+    fclose(file);
 
     return 0;
 
