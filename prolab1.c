@@ -66,35 +66,35 @@ int indexDosyasiOlustur()
     if (file == NULL)  return 1;
 
     char tmp[20]; // Linked list de gelebilir
-    int caunter = 0;
+    int counter = 0;
     while (!feof(file))
     {
         fscanf(file,"%s",tmp); // Dosyanın ne kadar büyük olduğunu tespit etmek için bir okuma yapıyoruz
-        caunter++;
+        counter++;
     }
 
     rewind(file);
 
 
-    kayit data[caunter-1]; // Dosya büyüklüğünün 1 eksiği 0 da dahil olarak bizim eleman sayımız
+    kayit data[counter-1]; // Dosya büyüklüğünün 1 eksiği 0 da dahil olarak bizim eleman sayımız
 
-    caunter = 0;
+    counter = 0;
     int konum;
     while (!feof(file))
     {
         konum = ftell(file);
-        data[caunter].konum = ftell(file);// burada bir hata var geçici bir çözüm olarak ek değişken kullandık
-        fscanf(file,"%d)%d)%d",&data[caunter].ogrNo,&data[caunter].dersKodu,&data[caunter].puan); // Dosyadaki kısımları okuyoruz ancak bütün bilgileri okumak gereksiz burası düzenleencek
-        caunter++;
+        data[counter].konum = ftell(file);// burada bir hata var geçici bir çözüm olarak ek değişken kullandık
+        fscanf(file,"%d)%d)%d",&data[counter].ogrNo,&data[counter].dersKodu,&data[counter].puan); // Dosyadaki kısımları okuyoruz ancak bütün bilgileri okumak gereksiz burası düzenleencek
+        counter++;
     }
 
     fclose(file);
 
     int swap[4];
 
-    for(int i=0;i<caunter-1;i++) // Sıralama algoritmamız
+    for(int i=0;i<counter-1;i++) // Sıralama algoritmamız
     {
-        for(int j=i;j<caunter-1;j++)
+        for(int j=i;j<counter-1;j++)
         {
             if (data[i].ogrNo > data[j].ogrNo)
             {
@@ -124,7 +124,7 @@ int indexDosyasiOlustur()
 
     if (file == NULL)  return 1;
 
-    for(int i=0;i<caunter;i++)
+    for(int i=0;i<counter;i++)
     {
         fprintf(dosya,"%d)%d\n",data[i].ogrNo,data[i].konum); // index dosyası oluşturuluyor
     }
