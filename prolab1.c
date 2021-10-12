@@ -29,7 +29,7 @@ int main(void)
 
     //indeksDosyasiniSil();
 
-    //veriDosyasiniGoster();
+    veriDosyasiniGoster();
 }
 
 
@@ -47,6 +47,10 @@ int indexDosyasiniGoster()
         fscanf(file,"%d)%d",&data[0],&data[1]);
         printf("Anahtar: %d Buffer: %d \n",data[0],data[1]);
     }
+
+    fclose(file);
+
+    return 0;
 
 
 }
@@ -191,6 +195,8 @@ int veriDosyasiniGoster()
         fscanf(file,"%d)%d)%d",&student.ogrNo,&student.dersKodu,&student.puan);
         printf("Ogrenci No: %d Ders Kodu: %d Puanı: %d\n",student.ogrNo,student.dersKodu,student.puan);
     }
+
+    close(file);
 
     return 0;
 
