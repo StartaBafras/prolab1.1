@@ -23,13 +23,13 @@ int main(void)
 {
     indexDosyasiOlustur();
 
-    //indexDosyasiniGoster();
+    indexDosyasiniGoster();
 
     //kayitEkle();
 
     //indeksDosyasiniSil();
 
-    veriDosyasiniGoster();
+    //veriDosyasiniGoster();
 }
 
 
@@ -120,7 +120,7 @@ int indexDosyasiOlustur()
 
     if (file == NULL)  return 1;
 
-    for(int i=0;i<caunter-1;i++)
+    for(int i=0;i<caunter;i++)
     {
         fprintf(dosya,"%d)%d\n",data[i].ogrNo,data[i].konum); // index dosyası oluşturuluyor
     }
