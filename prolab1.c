@@ -23,13 +23,13 @@ int main(void)
 {
     indexDosyasiOlustur();
 
-    indexDosyasiniGoster();
+    //indexDosyasiniGoster();
 
-    kayitEkle();
+    //kayitEkle();
 
-    indeksDosyasiniSil();
+    //indeksDosyasiniSil();
 
-    veriDosyasiniGoster();
+    //veriDosyasiniGoster();
 }
 
 
@@ -76,7 +76,7 @@ int indexDosyasiOlustur()
     rewind(file);
 
 
-    kayit data[counter-1]; // Dosya büyüklüğünün 1 eksiği 0 da dahil olarak bizim eleman sayımız
+    kayit data[counter]; // Dosya büyüklüğünün 1 eksiği 0 da dahil olarak bizim eleman sayımız
 
     counter = 0;
     int konum;
