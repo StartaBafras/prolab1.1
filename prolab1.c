@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 
 int indexDosyasiOlustur();
 
@@ -9,6 +10,10 @@ int kayitEkle();
 int indeksDosyasiniSil();
 
 int veriDosyasiniGoster();
+
+int kayitBul(int number);
+
+int* find_neighbor(int *data, int index,int *location);
 
 typedef struct kayit{
     int ogrNo;
@@ -30,6 +35,7 @@ int main(void)
     //indeksDosyasiniSil();
 
     //veriDosyasiniGoster();
+    kayitBul(14);
 }
 
 
@@ -201,4 +207,99 @@ int veriDosyasiniGoster()
     return 0;
 
 
+}
+
+int kayitBul(int number)
+{
+    FILE *file = fopen("index.txt","r");
+    if(file == NULL) return 1;
+
+    char tmp[20];
+
+    int caunter = 0;
+
+    while (!feof(file))
+    {
+        fscanf(file,"%s",tmp);
+        caunter++;
+    }
+
+    rewind(file);
+
+    int data[caunter-1][2];
+    caunter = 0;
+
+    while (!feof(file))
+    {
+        fscanf(file,"%d)%d",&data[caunter][0],&data[caunter][1]);
+        caunter++;
+    }
+
+    int min = 0;
+    int max = caunter-2; //boşluğu da okuduğu için 2 çıkartıyoruz
+    int mid = max/2;
+
+    int *p = &data[0][0];
+
+    while(1)
+    {
+        mid = min + ((max -min) /2);
+
+        if(data[mid][0] == number)
+        {
+            
+            int *location = malloc(sizeof(int)*2); // fonksiyon içindeki değerler belirsiz olduğu için static terimini kabul etmedi bu yola gittik
+
+            find_neighbor(&data[0][0],mid,location);
+
+            printf("\n%d\n",location[0]);
+            printf("%d\n",location[1]);
+            return mid;
+        }
+        if(data[mid][0] < number)
+        {
+            min = mid +1;
+        }
+        else
+        {
+            max = mid -1;
+        }
+    }
+
+
+}
+
+int* find_neighbor(int *data, int index,int *location)
+{
+    int min=index, max=index;
+    //printf("%d",*data);
+    int caunter = 0;
+    
+    while (1)
+    {
+        if(*(data+max+1) == index)
+        {
+            max++;
+            printf("%d\n",*(data+max));
+        }
+        else break;
+    }
+
+    while (1)
+    {
+        if(*(data+min-1) == index)
+        {
+            min--;
+            printf("%d\n",*(data+min));
+        }
+        else break;
+    }
+    
+    location[0] = min;
+    location[1] = max;
+
+    //return (&spacing);
+    
+
+   
 }
