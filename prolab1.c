@@ -35,7 +35,7 @@ int main(void)
     //indeksDosyasiniSil();
 
     //veriDosyasiniGoster();
-    kayitBul(14);
+    //kayitBul(14);
 }
 
 
@@ -98,9 +98,9 @@ int indexDosyasiOlustur()
 
     int swap[4];
 
-    for(int i=0;i<counter-1;i++) // Sıralama algoritmamız
+    for(int i=0;i<counter;i++) // Sıralama algoritmamız
     {
-        for(int j=i;j<counter-1;j++)
+        for(int j=i;j<counter;j++)
         {
             if (data[i].ogrNo > data[j].ogrNo)
             {
@@ -212,7 +212,7 @@ int veriDosyasiniGoster()
 int kayitBul(int number)
 {
     FILE *file = fopen("index.txt","r");
-    if(file == NULL) return 1;
+    //if(file == NULL) return 1;
 
     char tmp[20];
 
@@ -235,12 +235,16 @@ int kayitBul(int number)
         caunter++;
     }
 
+    fclose(file);
+
     int min = 0;
     int max = caunter-2; //boşluğu da okuduğu için 2 çıkartıyoruz
     int mid = max/2;
 
     int *p = &data[0][0];
 
+    int *location = malloc(sizeof(int)*2); // fonksiyon içindeki değerler belirsiz olduğu için static terimini kabul etmedi bu yola gittik
+    //silinmemesi için erken tanımlıyoruz
     while(1)
     {
         mid = min + ((max -min) /2);
@@ -248,13 +252,14 @@ int kayitBul(int number)
         if(data[mid][0] == number)
         {
             
-            int *location = malloc(sizeof(int)*2); // fonksiyon içindeki değerler belirsiz olduğu için static terimini kabul etmedi bu yola gittik
+            //int *location = malloc(sizeof(int)*2); // fonksiyon içindeki değerler belirsiz olduğu için static terimini kabul etmedi bu yola gittik
 
             find_neighbor(&data[0][0],mid,location);
 
             printf("\n%d\n",location[0]);
             printf("%d\n",location[1]);
-            return mid;
+            break;
+            //return mid;
         }
         if(data[mid][0] < number)
         {
@@ -265,19 +270,32 @@ int kayitBul(int number)
             max = mid -1;
         }
     }
+    
+    FILE *file2 = fopen("students.bin","rb");
 
+    if(file2 == NULL) return 1;
+    
+    kayit students;
+
+    for(int i = location[0]; i<=location[1];i++)
+    {
+        fseek(file2,data[i][1],SEEK_SET);
+        fscanf(file2,"%d)%d)%d",&students.ogrNo,&students.dersKodu,&students.puan);
+        printf("Ogrenci no: %d Ders no: %d Puan: %d \n \n",students.ogrNo,students.dersKodu,students.puan);
+    }
+    
 
 }
 
-int* find_neighbor(int *data, int index,int *location)
+int* find_neighbor(int *data, int index, int *location)
 {
     int min=index, max=index;
-    //printf("%d",*data);
-    int caunter = 0;
     
+    int caunter = 0;
+    printf("%d",*(data+(max*2)+3));
     while (1)
     {
-        if(*(data+max+1) == index)
+        if(*(data+(max*2)+3) == *(data+(index*2)))
         {
             max++;
             printf("%d\n",*(data+max));
@@ -287,7 +305,7 @@ int* find_neighbor(int *data, int index,int *location)
 
     while (1)
     {
-        if(*(data+min-1) == index)
+        if(*(data+(min*2)-3) == index)
         {
             min--;
             printf("%d\n",*(data+min));
@@ -298,6 +316,7 @@ int* find_neighbor(int *data, int index,int *location)
     location[0] = min;
     location[1] = max;
 
+    //if(min == max) return min;
     //return (&spacing);
     
 
