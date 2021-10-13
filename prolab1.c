@@ -15,6 +15,8 @@ int kayitBul(int number);
 
 int* find_neighbor(int *data, int index,int *location);
 
+int kayitGuncelle();
+
 typedef struct kayit{
     int ogrNo;
     int dersKodu;
@@ -35,7 +37,8 @@ int main(void)
     //indeksDosyasiniSil();
 
     //veriDosyasiniGoster();
-    kayitBul(14);
+    int a = kayitBul(3);
+    if(a == 2) printf("Ogrenci bulunamadi");
 }
 
 
@@ -258,16 +261,21 @@ int kayitBul(int number)
             /*
             printf("\n%d\n",location[0]);
             printf("%d\n",location[1]);*/
-            break;
+            return 0;
             
         }
-        if(data[mid][0] < number)
+        else if(data[mid][0] < number)
         {
             min = mid +1;
         }
         else
         {
             max = mid -1;
+        }
+
+        if(max-min<0)
+        {
+            return 2; //Hata kontrolü yapılmalı
         }
     }
     
