@@ -35,7 +35,7 @@ int main(void)
     //indeksDosyasiniSil();
 
     //veriDosyasiniGoster();
-    //kayitBul(14);
+    kayitBul(14);
 }
 
 
@@ -212,7 +212,7 @@ int veriDosyasiniGoster()
 int kayitBul(int number)
 {
     FILE *file = fopen("index.txt","r");
-    //if(file == NULL) return 1;
+    if(file == NULL) return 1;
 
     char tmp[20];
 
@@ -252,14 +252,14 @@ int kayitBul(int number)
         if(data[mid][0] == number)
         {
             
-            //int *location = malloc(sizeof(int)*2); // fonksiyon içindeki değerler belirsiz olduğu için static terimini kabul etmedi bu yola gittik
 
             find_neighbor(&data[0][0],mid,location);
 
+            /*
             printf("\n%d\n",location[0]);
-            printf("%d\n",location[1]);
+            printf("%d\n",location[1]);*/
             break;
-            //return mid;
+            
         }
         if(data[mid][0] < number)
         {
@@ -292,23 +292,22 @@ int* find_neighbor(int *data, int index, int *location)
     int min=index, max=index;
     
     int caunter = 0;
-    printf("%d",*(data+(max*2)+3));
     while (1)
     {
-        if(*(data+(max*2)+3) == *(data+(index*2)))
+        if(*(data+(max*2)+2) == *(data+(index*2)))
         {
             max++;
-            printf("%d\n",*(data+max));
+            //printf("%d\n",*(data+max));
         }
         else break;
     }
 
     while (1)
     {
-        if(*(data+(min*2)-3) == index)
+        if(*(data+(min*2)-2) ==  *(data+(index*2)))
         {
             min--;
-            printf("%d\n",*(data+min));
+            //printf("%d\n",*(data+min));
         }
         else break;
     }
