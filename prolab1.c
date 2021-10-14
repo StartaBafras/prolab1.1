@@ -227,7 +227,7 @@ int kayitBul(int number, int *location)
     {
         fscanf(file,"%s",tmp);
         caunter++;
-    }
+    } // Bu kısma kadar dosyadaki satır sayısın tespit ediyoruz
 
     rewind(file);
 
@@ -238,27 +238,28 @@ int kayitBul(int number, int *location)
     {
         fscanf(file,"%d)%d",&data[caunter][0],&data[caunter][1]);
         caunter++;
-    }
+    }//index okunuyor
 
     fclose(file);
 
+    //Binary search için kullanılacak değişkenler tanımlandı
     int min = 0;
     int max = caunter-2; //boşluğu da okuduğu için 2 çıkartıyoruz
-    int mid = max/2;
+    int mid = max/2; 
 
-    int *p = &data[0][0];
+    int *p = &data[0][0]; // Fonksiyonlarda kullanmak için işaretçi getiriyoruz ama artık gerek kalmadı silinecek
 
     //int *location = malloc(sizeof(int)*2); // fonksiyon içindeki değerler belirsiz olduğu için static terimini kabul etmedi bu yola gittik
     //silinmemesi için erken tanımlıyoruz
     while(1)
     {
-        mid = min + ((max -min) /2);
+        mid = min + ((max -min) /2); // Arama aralığını güncelliyoruz
 
         if(data[mid][0] == number)
         {
             
 
-            find_neighbor(&data[0][0],mid,location);
+            find_neighbor(&data[0][0],mid,location); //Olası komşuları arayan fonksiyon
 
             /*
             printf("\n%d\n",location[0]);
@@ -269,11 +270,11 @@ int kayitBul(int number, int *location)
         }
         else if(data[mid][0] < number)
         {
-            min = mid +1;
+            min = mid +1; // Bulamama durumunda aralık güncellemesi yapıyoruz
         }
         else
         {
-            max = mid -1;
+            max = mid -1; // Bulamama durumunda aralık güncellemesi yapıyoruz
         }
 
         if(max-min<0)
@@ -288,7 +289,7 @@ int kayitBul(int number, int *location)
     
     kayit students;
 
-    for(int i = location[0]; i<=location[1];i++)
+    for(int i = location[0]; i<=location[1];i++)//Bulunanları yazdırıyoruz
     {
         fseek(file2,data[i][1],SEEK_SET);
         fscanf(file2,"%d)%d)%d",&students.ogrNo,&students.dersKodu,&students.puan);
@@ -305,7 +306,7 @@ int* find_neighbor(int *data, int index, int *location)
     int caunter = 0;
     while (1)
     {
-        if(*(data+(max*2)+2) == *(data+(index*2)))
+        if(*(data+(max*2)+2) == *(data+(index*2))) //Düz işaretçi aritmetiği bir sonraki indexi kontrol ediyor
         {
             max++;
             //printf("%d\n",*(data+max));
@@ -323,7 +324,7 @@ int* find_neighbor(int *data, int index, int *location)
         else break;
     }
     
-    location[0] = min;
+    location[0] = min; //Komşu varsa bunların bitiş ve başlangıç aralığını tespit ettik
     location[1] = max;
 
     //if(min == max) return min;
