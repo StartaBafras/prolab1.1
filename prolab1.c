@@ -28,7 +28,7 @@ typedef struct kayit{
 
 int main(void)
 {
-    indexDosyasiOlustur();
+    //indexDosyasiOlustur();
 
     //indexDosyasiniGoster();
 
@@ -221,30 +221,30 @@ int kayitBul(int number, int *location)
 
     char tmp[20];
 
-    int caunter = 0;
+    int counter = 0;
 
     while (!feof(file))
     {
         fscanf(file,"%s",tmp);
-        caunter++;
+        counter++;
     } // Bu kısma kadar dosyadaki satır sayısın tespit ediyoruz
 
     rewind(file);
 
-    int data[caunter-1][2];
-    caunter = 0;
+    int data[counter-1][2];
+    counter = 0;
 
     while (!feof(file))
     {
-        fscanf(file,"%d)%d",&data[caunter][0],&data[caunter][1]);
-        caunter++;
+        fscanf(file,"%d)%d",&data[counter][0],&data[counter][1]);
+        counter++;
     }//index okunuyor
 
     fclose(file);
 
     //Binary search için kullanılacak değişkenler tanımlandı
     int min = 0;
-    int max = caunter-2; //boşluğu da okuduğu için 2 çıkartıyoruz
+    int max = counter-2; //boşluğu da okuduğu için 2 çıkartıyoruz
     int mid = max/2; 
 
     int *p = &data[0][0]; // Fonksiyonlarda kullanmak için işaretçi getiriyoruz ama artık gerek kalmadı silinecek
@@ -303,7 +303,7 @@ int* find_neighbor(int *data, int index, int *location)
 {
     int min=index, max=index;
     
-    int caunter = 0;
+    int counter = 0;
     while (1)
     {
         if(*(data+(max*2)+2) == *(data+(index*2))) //Düz işaretçi aritmetiği bir sonraki indexi kontrol ediyor
