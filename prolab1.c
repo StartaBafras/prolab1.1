@@ -17,6 +17,8 @@ int* find_neighbor(int *data, int index,int *location);
 
 int kayitGuncelle();
 
+int kayitSil();
+
 typedef struct kayit{
     int ogrNo;
     int dersKodu;
@@ -37,10 +39,12 @@ int main(void)
     //indeksDosyasiniSil();
 
     //veriDosyasiniGoster();
+    /*
     int *location = malloc(sizeof(int)*2);
-    int a = kayitBul(16,location);
-    if(a == 2) printf("Ogrenci bulunamadi");
+    if(kayitBul(3,location) == 2) printf("Ogrenci bulunamadi");
     free(location);
+    */
+    kayitSil();
 }
 
 
@@ -161,7 +165,7 @@ int kayitEkle(){
       printf("Dosya acma hatasi!");
       return 1;
   }
-    fprintf(fp,"%d)%d)%d\n",student.ogrNo,student.dersKodu,student.puan); //Dosyamizin sonuna kullan�c� tarafindan girilen bilgileri yazdik
+    fprintf(fp,"\n%d)%d)%d",student.ogrNo,student.dersKodu,student.puan); //Dosyamizin sonuna kullan�c� tarafindan girilen bilgileri yazdik
     fclose(fp);
 
     indexDosyasiOlustur(); //yaptigimiz eklemenin index dosyasinda sirali sekilde gozukmesi icin index dosyasini tekrar olusturduk.
@@ -249,8 +253,7 @@ int kayitBul(int number, int *location)
 
     int *p = &data[0][0]; // Fonksiyonlarda kullanmak için işaretçi getiriyoruz ama artık gerek kalmadı silinecek
 
-    //int *location = malloc(sizeof(int)*2); // fonksiyon içindeki değerler belirsiz olduğu için static terimini kabul etmedi bu yola gittik
-    //silinmemesi için erken tanımlıyoruz
+    
     while(1)
     {
         mid = min + ((max -min) /2); // Arama aralığını güncelliyoruz
@@ -285,7 +288,7 @@ int kayitBul(int number, int *location)
     
     FILE *file2 = fopen("students.bin","rb");
 
-    if(file2 == NULL) return 1;
+    if(file2 == NULL) return 2;
     
     kayit students;
 
@@ -293,8 +296,11 @@ int kayitBul(int number, int *location)
     {
         fseek(file2,data[i][1],SEEK_SET);
         fscanf(file2,"%d)%d)%d",&students.ogrNo,&students.dersKodu,&students.puan);
-        printf("Ogrenci no: %d Ders no: %d Puan: %d \n \n",students.ogrNo,students.dersKodu,students.puan);
+        printf("%d) Ogrenci no: %d Ders no: %d Puan: %d \n \n",i -location[0]  + 1,students.ogrNo,students.dersKodu,students.puan);
     }
+
+    fclose(file2);
+
     
 
 }
@@ -332,4 +338,98 @@ int* find_neighbor(int *data, int index, int *location)
     
 
    
+}
+
+int kayitSil()
+{   
+
+    FILE *file = fopen("index.txt","r");
+    if(file == NULL) return 1;
+
+    char tmp[20];
+
+    int counter = 0;
+
+    while (!feof(file))
+    {
+        fscanf(file,"%s",tmp);
+        counter++;
+    } // Bu kısma kadar dosyadaki satır sayısın tespit ediyoruz
+
+    rewind(file);
+
+    int data[counter-1][2];
+    counter = 0;
+
+    while (!feof(file))
+    {
+        fscanf(file,"%d)%d",&data[counter][0],&data[counter][1]);
+        counter++;
+    }//index okunuyor
+
+    fclose(file);
+
+
+
+
+
+    int s_number;
+    printf("Kaydi silinecek ogrencinin numarasını giriniz: ");
+    scanf("%d",&s_number);
+
+
+    int *location = malloc(sizeof(int)*2);
+    int e = kayitBul(s_number,location);
+    if(e == 2) printf("\nOgrenci bulunamadi\n");
+
+    
+    printf("Kacinci kaydin silinmesini istediginizi seciniz: ");
+    scanf("%d",&s_number);
+
+    if(!((location[0] + s_number - 1) <= location[1] && (location[0] + s_number - 1) >= location[0])) // Aralıkta olmalı
+    {
+        printf("Hatalı index seçimi");
+        return 3;
+    }
+
+    
+    
+    FILE *file2 = fopen("students.bin","rb+");
+    if(file2 == NULL) return 2;
+
+    FILE *file3 = fopen("tmp.bin","wb+");
+
+
+    fseek(file2,0,SEEK_END);
+    int end = ftell(file2);
+    rewind(file2);
+
+    
+    
+    int *buffer = malloc(sizeof(int) * (int) (data[location[0]+s_number-1][1]));
+
+    fread(buffer,(data[location[0]+s_number-1][1])+1,1,file2);
+    fwrite(buffer,(data[location[0]+s_number-1][1])+1,1,file3);
+
+    char c = 0;
+    counter = 0;
+    while( c != '\n' && c != EOF)
+    {
+        c=getc(file2);
+        counter++;
+    }
+
+    if(c != EOF)
+    {
+        int *buffer2 = malloc(sizeof(int)*(end-(data[location[0]+s_number-1][1])));
+        fread(buffer2,end-counter-(data[location[0]+s_number-1][1]+1),1,file2);
+        fwrite(buffer2,end-counter-(data[location[0]+s_number-1][1]+1),1,file3);
+    
+    }
+
+    remove("students.bin");
+    rename("tmp.bin","students.bin");
+    fclose(file3);
+    
+
 }
