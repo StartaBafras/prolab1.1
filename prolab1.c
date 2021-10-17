@@ -41,7 +41,7 @@ int main(void)
     //veriDosyasiniGoster();
     /*
     int *location = malloc(sizeof(int)*2);
-    if(kayitBul(3,location) == 2) printf("Ogrenci bulunamadi");
+    if(kayitBul(4,location) == 2) printf("Ogrenci bulunamadi");
     free(location);
     */
     kayitSil();
@@ -430,6 +430,7 @@ int kayitSil()
     remove("students.bin");
     rename("tmp.bin","students.bin");
     fclose(file3);
+    indexDosyasiOlustur();
     
 
 }
