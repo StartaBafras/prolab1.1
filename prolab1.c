@@ -17,7 +17,7 @@ int* find_neighbor(int *data, int index,int *location);
 
 int kayitGuncelle();
 
-int kayitSil();
+int kayitSil(int s_number);
 
 typedef struct kayit{
     int ogrNo;
@@ -44,7 +44,10 @@ int main(void)
     if(kayitBul(4,location) == 2) printf("Ogrenci bulunamadi");
     free(location);
     */
-    kayitSil();
+    int s_number;
+    printf("Kaydi silinecek ogrencinin numarasını giriniz: ");
+    scanf("%d",&s_number);
+    kayitSil(s_number);
 }
 
 
@@ -340,7 +343,7 @@ int* find_neighbor(int *data, int index, int *location)
    
 }
 
-int kayitSil()
+int kayitSil(int s_number)
 {   
 
     FILE *file = fopen("index.txt","r");
@@ -373,9 +376,7 @@ int kayitSil()
 
 
 
-    int s_number;
-    printf("Kaydi silinecek ogrencinin numarasını giriniz: ");
-    scanf("%d",&s_number);
+
 
 
     int *location = malloc(sizeof(int)*2);
