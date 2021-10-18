@@ -34,7 +34,7 @@ int main(void)
 
     //indexDosyasiniGoster();
 
-    //kayitEkle();
+    kayitEkle();
 
     //indeksDosyasiniSil();
 
@@ -375,11 +375,7 @@ int kayitSil(int s_number)
 
 
 
-
-
-
-
-    int *location = malloc(sizeof(int)*2);
+    int *location = malloc(sizeof(int)*2); // Kayitbul çalıştırılıyor 
     int e = kayitBul(s_number,location);
     if(e == 2) printf("\nOgrenci bulunamadi\n");
 
@@ -402,29 +398,29 @@ int kayitSil(int s_number)
 
 
     fseek(file2,0,SEEK_END);
-    int end = ftell(file2);
+    int end = ftell(file2); // Dosyadaki toplam bayt sayısı bulunuyor
     rewind(file2);
 
     
     
-    int *buffer = malloc(sizeof(int) * (int) (data[location[0]+s_number-1][1]));
+    int *buffer = malloc(sizeof(int) * (int) (data[location[0]+s_number-1][1]));// Silinecek kısma kadar olan bayt sayısı büyüklüğünde alan açılıyor
 
-    fread(buffer,(data[location[0]+s_number-1][1])+1,1,file2);
-    fwrite(buffer,(data[location[0]+s_number-1][1])+1,1,file3);
+    fread(buffer,(data[location[0]+s_number-1][1]+1),1,file2);// Silinecek kısma kadar okunuyor
+    fwrite(buffer,(data[location[0]+s_number-1][1]+1),1,file3); //Okunan kısım yeni dosyaya yazılyor
 
     char c = 0;
     counter = 0;
-    while( c != '\n' && c != EOF)
+    while( c != '\n' && c != EOF)//Silinecek kısım tek tek okunuyor böylece orası atlanmış oluyor
     {
         c=getc(file2);
         counter++;
     }
 
-    if(c != EOF)
+    if(c != EOF)//Son satırı silmek istersek ve bu if bloğu olmasa sonsuz döngüye girer
     {
-        int *buffer2 = malloc(sizeof(int)*(end-(data[location[0]+s_number-1][1])));
-        fread(buffer2,end-counter-(data[location[0]+s_number-1][1]+1),1,file2);
-        fwrite(buffer2,end-counter-(data[location[0]+s_number-1][1]+1),1,file3);
+        int *buffer2 = malloc(sizeof(int)*(end-(data[location[0]+s_number-1][1]))); // 2. kısım için alan ayrılıyor
+        fread(buffer2,end-counter-(data[location[0]+s_number-1][1]+1),1,file2); //2. kısım okunuyor
+        fwrite(buffer2,end-counter-(data[location[0]+s_number-1][1]+1),1,file3); //2. kısım yazılıyor
     
     }
 
