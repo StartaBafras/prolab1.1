@@ -34,7 +34,7 @@ int main(void)
 
     //indexDosyasiniGoster();
 
-    kayitEkle();
+    //kayitEkle();
 
     //indeksDosyasiniSil();
 
@@ -101,7 +101,8 @@ int indexDosyasiOlustur()
     while (!feof(file))
     {
         konum = ftell(file);
-        data[counter].konum = ftell(file);// burada bir hata var geçici bir çözüm olarak ek değişken kullandık
+        //data[counter].konum = ftell(file);// burada bir hata var geçici bir çözüm olarak ek değişken kullandık
+        data[counter].konum = konum;
         fscanf(file,"%d)%d)%d",&data[counter].ogrNo,&data[counter].dersKodu,&data[counter].puan); // Dosyadaki kısımları okuyoruz ancak bütün bilgileri okumak gereksiz burası düzenleencek
         counter++;
     }
@@ -403,11 +404,11 @@ int kayitSil(int s_number)
 
     
     
-    int *buffer = malloc(sizeof(int) * (int) (data[location[0]+s_number-1][1]));// Silinecek kısma kadar olan bayt sayısı büyüklüğünde alan açılıyor
+    int *buffer = malloc(sizeof(int) * (int) (data[location[0]+s_number-1][1]+1));// Silinecek kısma kadar olan bayt sayısı büyüklüğünde alan açılıyor
 
     fread(buffer,(data[location[0]+s_number-1][1]+1),1,file2);// Silinecek kısma kadar okunuyor
-    fwrite(buffer,(data[location[0]+s_number-1][1]+1),1,file3); //Okunan kısım yeni dosyaya yazılyor
-
+    fwrite(buffer,(data[location[0]+s_number-1][1]),1,file3); //Okunan kısım yeni dosyaya yazılyor
+    
     char c = 0;
     counter = 0;
     while( c != '\n' && c != EOF)//Silinecek kısım tek tek okunuyor böylece orası atlanmış oluyor
@@ -415,15 +416,16 @@ int kayitSil(int s_number)
         c=getc(file2);
         counter++;
     }
-
+    
     if(c != EOF)//Son satırı silmek istersek ve bu if bloğu olmasa sonsuz döngüye girer
     {
+        fputc('\n',file3);
         int *buffer2 = malloc(sizeof(int)*(end-(data[location[0]+s_number-1][1]))); // 2. kısım için alan ayrılıyor
         fread(buffer2,end-counter-(data[location[0]+s_number-1][1]+1),1,file2); //2. kısım okunuyor
         fwrite(buffer2,end-counter-(data[location[0]+s_number-1][1]+1),1,file3); //2. kısım yazılıyor
     
     }
-
+    
     remove("students.bin");
     rename("tmp.bin","students.bin");
     fclose(file3);
