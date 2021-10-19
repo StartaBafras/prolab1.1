@@ -30,11 +30,11 @@ typedef struct kayit{
 
 int main(void)
 {
-    //indexDosyasiOlustur();
+    indexDosyasiOlustur();
 
     //indexDosyasiniGoster();
 
-    kayitEkle();
+    //kayitEkle();
 
     //indeksDosyasiniSil();
 
@@ -49,7 +49,7 @@ int main(void)
     scanf("%d",&s_number);
     kayitSil(s_number);
     */
-    //kayitGuncelle(14);
+    kayitGuncelle(13);
 
 }
 
@@ -103,9 +103,9 @@ int indexDosyasiOlustur()
     int konum;
     while (!feof(file))
     {
-        //konum = ftell(file);
-        data[counter].konum = ftell(file);// burada bir hata var geçici bir çözüm olarak ek değişken kullandık
-        //data[counter].konum = konum;
+        
+        data[counter].konum = ftell(file);
+
         fscanf(file,"%d)%d)%d",&data[counter].ogrNo,&data[counter].dersKodu,&data[counter].puan); // Dosyadaki kısımları okuyoruz ancak bütün bilgileri okumak gereksiz burası düzenleencek
         counter++;
     }
@@ -259,7 +259,7 @@ int kayitBul(int number, int *location)
     int max = counter-2; //boşluğu da okuduğu için 2 çıkartıyoruz
     int mid = max/2;
 
-    int *p = &data[0][0]; // Fonksiyonlarda kullanmak için işaretçi getiriyoruz ama artık gerek kalmadı silinecek
+    
 
 
     while(1)
@@ -269,13 +269,8 @@ int kayitBul(int number, int *location)
         if(data[mid][0] == number)
         {
 
-
             find_neighbor(&data[0][0],mid,location); //Olası komşuları arayan fonksiyon
 
-            /*
-            printf("\n%d\n",location[0]);
-            printf("%d\n",location[1]);
-            return 0;*/ // Return ifadesi hatalı
             break;
 
         }
@@ -341,8 +336,7 @@ int* find_neighbor(int *data, int index, int *location)
     location[0] = min; //Komşu varsa bunların bitiş ve başlangıç aralığını tespit ettik
     location[1] = max;
 
-    //if(min == max) return min;
-    //return (&spacing);
+
 
 
 
@@ -518,7 +512,7 @@ int kayitGuncelle(int s_number)
     fprintf(file2,"%d)%d)%d",student.ogrNo,student.dersKodu,new_point);
     if(c != EOF)
     {
-        fwrite(buffer2,end-(data[location[0]+s_number-1][1])-counter,1,file2); //2. kısım yazılıyor
+        fwrite(buffer2,end-(data[location[0]+s_number-1][1])-counter-1,1,file2); //2. kısım yazılıyor, yazılan alanın boyutu ayarlanabilir
     }
 
     fclose(file2);
