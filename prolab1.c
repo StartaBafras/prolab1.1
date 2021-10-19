@@ -34,7 +34,7 @@ int main(void)
 
     //indexDosyasiniGoster();
 
-    //kayitEkle();
+    kayitEkle();
 
     //indeksDosyasiniSil();
 
@@ -43,13 +43,13 @@ int main(void)
     int *location = malloc(sizeof(int)*2);
     if(kayitBul(4,location) == 2) printf("Ogrenci bulunamadi");
     free(location);
-    
+
     int s_number;
     printf("Kaydi silinecek ogrencinin numarasını giriniz: ");
     scanf("%d",&s_number);
     kayitSil(s_number);
     */
-    kayitGuncelle(14);
+    //kayitGuncelle(14);
 
 }
 
@@ -172,6 +172,7 @@ int kayitEkle(){
       printf("Dosya acma hatasi!");
       return 1;
   }
+    fseek(fp, 0, SEEK_END);
     fprintf(fp,"\n%d)%d)%d",student.ogrNo,student.dersKodu,student.puan); //Dosyamizin sonuna kullan�c� tarafindan girilen bilgileri yazdik
     fclose(fp);
 
@@ -256,18 +257,18 @@ int kayitBul(int number, int *location)
     //Binary search için kullanılacak değişkenler tanımlandı
     int min = 0;
     int max = counter-2; //boşluğu da okuduğu için 2 çıkartıyoruz
-    int mid = max/2; 
+    int mid = max/2;
 
     int *p = &data[0][0]; // Fonksiyonlarda kullanmak için işaretçi getiriyoruz ama artık gerek kalmadı silinecek
 
-    
+
     while(1)
     {
         mid = min + ((max -min) /2); // Arama aralığını güncelliyoruz
 
         if(data[mid][0] == number)
         {
-            
+
 
             find_neighbor(&data[0][0],mid,location); //Olası komşuları arayan fonksiyon
 
@@ -276,7 +277,7 @@ int kayitBul(int number, int *location)
             printf("%d\n",location[1]);
             return 0;*/ // Return ifadesi hatalı
             break;
-            
+
         }
         else if(data[mid][0] < number)
         {
@@ -292,11 +293,11 @@ int kayitBul(int number, int *location)
             return 2; //Hata kontrolü yapılmalı
         }
     }
-    
+
     FILE *file2 = fopen("students.bin","rb");
 
     if(file2 == NULL) return 2;
-    
+
     kayit students;
 
     for(int i = location[0]; i<=location[1];i++)//Bulunanları yazdırıyoruz
@@ -308,14 +309,14 @@ int kayitBul(int number, int *location)
 
     fclose(file2);
 
-    
+
 
 }
 
 int* find_neighbor(int *data, int index, int *location)
 {
     int min=index, max=index;
-    
+
     int counter = 0;
     while (1)
     {
@@ -336,20 +337,20 @@ int* find_neighbor(int *data, int index, int *location)
         }
         else break;
     }
-    
+
     location[0] = min; //Komşu varsa bunların bitiş ve başlangıç aralığını tespit ettik
     location[1] = max;
 
     //if(min == max) return min;
     //return (&spacing);
-    
 
-   
+
+
 }
 
 int kayitSil(int s_number)
 
-{   
+{
 
     FILE *file = fopen("index.txt","r");
     if(file == NULL) return 1;
@@ -380,11 +381,11 @@ int kayitSil(int s_number)
 
 
 
-    int *location = malloc(sizeof(int)*2); // Kayitbul çalıştırılıyor 
+    int *location = malloc(sizeof(int)*2); // Kayitbul çalıştırılıyor
     int e = kayitBul(s_number,location);
     if(e == 2) printf("\nOgrenci bulunamadi\n");
 
-    
+
     printf("Kacinci kaydin silinmesini istediginizi seciniz: ");
     scanf("%d",&s_number);
 
@@ -394,8 +395,8 @@ int kayitSil(int s_number)
         return 3;
     }
 
-    
-    
+
+
     FILE *file2 = fopen("students.bin","rb+");
     if(file2 == NULL) return 2;
 
@@ -406,13 +407,13 @@ int kayitSil(int s_number)
     int end = ftell(file2); // Dosyadaki toplam bayt sayısı bulunuyor
     rewind(file2);
 
-    
-    
+
+
     int *buffer = malloc(sizeof(int) * (int) (data[location[0]+s_number-1][1]+1));// Silinecek kısma kadar olan bayt sayısı büyüklüğünde alan açılıyor
 
     fread(buffer,(data[location[0]+s_number-1][1]+1),1,file2);// Silinecek kısma kadar okunuyor
     fwrite(buffer,(data[location[0]+s_number-1][1]),1,file3); //Okunan kısım yeni dosyaya yazılyor
-    
+
     char c = 0;
     counter = 0;
     while( c != '\n' && c != EOF)//Silinecek kısım tek tek okunuyor böylece orası atlanmış oluyor
@@ -420,21 +421,21 @@ int kayitSil(int s_number)
         c=getc(file2);
         counter++;
     }
-    
+
     if(c != EOF)//Son satırı silmek istersek ve bu if bloğu olmasa sonsuz döngüye girer
     {
         fputc('\n',file3);
         int *buffer2 = malloc(sizeof(int)*(end-(data[location[0]+s_number-1][1]))); // 2. kısım için alan ayrılıyor
         fread(buffer2,end-counter-(data[location[0]+s_number-1][1]+1),1,file2); //2. kısım okunuyor
         fwrite(buffer2,end-counter-(data[location[0]+s_number-1][1]+1),1,file3); //2. kısım yazılıyor
-    
+
     }
-    
+
     remove("students.bin");
     rename("tmp.bin","students.bin");
     fclose(file3);
     indexDosyasiOlustur();
-    
+
 
 }
 
@@ -466,7 +467,7 @@ int kayitGuncelle(int s_number)
 
     fclose(file);
 
-    int *location = malloc(sizeof(int)*2); // Kayitbul çalıştırılıyor 
+    int *location = malloc(sizeof(int)*2); // Kayitbul çalıştırılıyor
     int e = kayitBul(s_number,location);
     if(e == 2) printf("\nOgrenci bulunamadi\n");
 
@@ -497,13 +498,13 @@ int kayitGuncelle(int s_number)
     kayit student;
     fseek(file2,(data[location[0]+s_number-1][1]+1),SEEK_SET);
     fscanf(file2,"%d)%d)%d",&student.ogrNo,&student.dersKodu,&student.puan);
-    
+
 
     int *buffer2 = malloc(sizeof(int)*(end-(data[location[0]+s_number-1][1]+1))); // 2. kısım için alan ayrılıyor
     fread(buffer2,end-(data[location[0]+s_number-1][1]+1),1,file2); //2. kısım okunuyor
 
     fseek(file2,(data[location[0]+s_number-1][1]+1),SEEK_SET);
-    
+
     char c;
     counter = 0;
     while( c != '\n' && c != EOF)
@@ -515,12 +516,12 @@ int kayitGuncelle(int s_number)
     fseek(file2,(data[location[0]+s_number-1][1]+1),SEEK_SET);
 
     fprintf(file2,"%d)%d)%d",student.ogrNo,student.dersKodu,new_point);
-    if(c != EOF) 
+    if(c != EOF)
     {
         fwrite(buffer2,end-(data[location[0]+s_number-1][1])-counter,1,file2); //2. kısım yazılıyor
     }
-    
+
     fclose(file2);
 
-    
+
 }
