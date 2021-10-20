@@ -34,39 +34,43 @@ int main(void)
     while(1){
     int secim;
     printf("Cikis yapmak icin --> 0\n");
-    printf("Indeks Dosyasini Gostermek icin --> 1\n");
-    printf("Indeks Dosyasini Silmek icin --> 2\n");
-    printf("Veri Dosyasini Gostermek icin --> 3\n");
-    printf("Kayit Eklemek icin --> 4\n");
-    printf("Kayit Bulmak icin --> 5\n");
-    printf("Kayit Guncellemek icin --> 6\n");
-    printf("Kayit Silmek icin --> 7\n");
+    printf("Indeks Dosyasi Olusturmak icin --> 2\n");
+    printf("Indeks Dosyasini Gostermek icin --> 2\n");
+    printf("Indeks Dosyasini Silmek icin --> 3\n");
+    printf("Veri Dosyasini Gostermek icin --> 4\n");
+    printf("Kayit Eklemek icin --> 5\n");
+    printf("Kayit Bulmak icin --> 6\n");
+    printf("Kayit Guncellemek icin --> 7\n");
+    printf("Kayit Silmek icin --> 8\n");
     printf("Hangi Islemi Yapmak Istediginizi Seciniz: ");
     scanf("%d", &secim);
 
-    indexDosyasiOlustur();
-
     if (secim==1)
     {
-    indexDosyasiniGoster();
+    indexDosyasiOlustur();
     }
 
     if (secim==2)
     {
-    indeksDosyasiniSil();
+    indexDosyasiniGoster();
     }
 
     if (secim==3)
     {
-    veriDosyasiniGoster();
+    indeksDosyasiniSil();
     }
 
     if (secim==4)
     {
-    kayitEkle();
+    veriDosyasiniGoster();
     }
 
     if (secim==5)
+    {
+    kayitEkle();
+    }
+
+    if (secim==6)
     {
     int s_number;
     printf("Kaydi bulunacak ogrencinin numarasını giriniz: ");
@@ -76,14 +80,14 @@ int main(void)
     free(location);
     }
 
-    if (secim==6)
+    if (secim==7)
     {
     int s_number;
     printf("Kaydi silinecek ogrencinin numarasını giriniz: ");
     scanf("%d",&s_number);
     kayitSil(s_number);
     }
-    if (secim==7)
+    if (secim==8)
     {
     int s_number;
     printf("Kaydi guncellenecek ogrencinin numarasını giriniz: ");
