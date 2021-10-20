@@ -30,27 +30,73 @@ typedef struct kayit{
 
 int main(void)
 {
+
+    while(1){
+    int secim;
+    printf("Cikis yapmak icin --> 0\n");
+    printf("Indeks Dosyasini Gostermek icin --> 1\n");
+    printf("Indeks Dosyasini Silmek icin --> 2\n");
+    printf("Veri Dosyasini Gostermek icin --> 3\n");
+    printf("Kayit Eklemek icin --> 4\n");
+    printf("Kayit Bulmak icin --> 5\n");
+    printf("Kayit Guncellemek icin --> 6\n");
+    printf("Kayit Silmek icin --> 7\n");
+    printf("Hangi Islemi Yapmak Istediginizi Seciniz: ");
+    scanf("%d", &secim);
+
     indexDosyasiOlustur();
 
-    //indexDosyasiniGoster();
+    if (secim==1)
+    {
+    indexDosyasiniGoster();
+    }
 
-    //kayitEkle();
+    if (secim==2)
+    {
+    indeksDosyasiniSil();
+    }
 
-    //indeksDosyasiniSil();
+    if (secim==3)
+    {
+    veriDosyasiniGoster();
+    }
 
-    //veriDosyasiniGoster();
-    /*
+    if (secim==4)
+    {
+    kayitEkle();
+    }
+
+    if (secim==5)
+    {
+    int s_number;
+    printf("Kaydi silinecek ogrencinin numarasını giriniz: ");
+    scanf("%d",&s_number);
     int *location = malloc(sizeof(int)*2);
-    if(kayitBul(4,location) == 2) printf("Ogrenci bulunamadi");
+    if(kayitBul(s_number,location) == 2) printf("Ogrenci bulunamadi");
     free(location);
+    }
 
+    if (secim==6)
+    {
     int s_number;
     printf("Kaydi silinecek ogrencinin numarasını giriniz: ");
     scanf("%d",&s_number);
     kayitSil(s_number);
-    */
-    kayitGuncelle(13);
+    }
+    if (secim==7)
+    {
+    int s_number;
+    printf("Kaydi guncellenecek ogrencinin numarasını giriniz: ");
+    scanf("%d",&s_number);
+    kayitGuncelle(s_number);
+    }
 
+    if (secim==0)
+    {
+        break;
+    }
+
+    }
 }
 
 
@@ -103,7 +149,7 @@ int indexDosyasiOlustur()
     int konum;
     while (!feof(file))
     {
-        
+
         data[counter].konum = ftell(file);
 
         fscanf(file,"%d)%d)%d",&data[counter].ogrNo,&data[counter].dersKodu,&data[counter].puan); // Dosyadaki kısımları okuyoruz ancak bütün bilgileri okumak gereksiz burası düzenleencek
@@ -158,7 +204,7 @@ int indexDosyasiOlustur()
 }
 
 int kayitEkle(){
-    kayit student; //Struct yap�m�z� student ismiyle kulland�k
+    kayit student; //Struct yapimizi student ismiyle kulland�k
 
     printf("Ogrenci no giriniz: "); //kullanicidan ogrenciye ait bilgileri aldik
     scanf("%d",&student.ogrNo);
@@ -168,12 +214,11 @@ int kayitEkle(){
     scanf("%d",&student.puan);
 
     FILE *fp = fopen("students.bin","ab");  //binary dosyamizi ekleme yapma modunda actik
-    if ((fp = fopen ("students.bin", "ab")) == NULL) { //dosya acilamazsa ekrana hata g�sterdik
+    if ((fp = fopen ("students.bin", "ab")) == NULL) { //dosya acilamazsa ekrana hata gosterdik
       printf("Dosya acma hatasi!");
       return 1;
   }
-    fseek(fp, 0, SEEK_END);
-    fprintf(fp,"\n%d)%d)%d",student.ogrNo,student.dersKodu,student.puan); //Dosyamizin sonuna kullan�c� tarafindan girilen bilgileri yazdik
+    fprintf(fp,"\n%d)%d)%d",student.ogrNo,student.dersKodu,student.puan); //Dosyamizin sonuna kullanici tarafindan girilen bilgileri yazdik
     fclose(fp);
 
     indexDosyasiOlustur(); //yaptigimiz eklemenin index dosyasinda sirali sekilde gozukmesi icin index dosyasini tekrar olusturduk.
@@ -259,7 +304,7 @@ int kayitBul(int number, int *location)
     int max = counter-2; //boşluğu da okuduğu için 2 çıkartıyoruz
     int mid = max/2;
 
-    
+
 
 
     while(1)
