@@ -34,7 +34,7 @@ int main(void)
     while(1){
     int secim;
     printf("Cikis yapmak icin --> 0\n");
-    printf("Indeks Dosyasi Olusturmak icin --> 2\n");
+    printf("Indeks Dosyasi Olusturmak icin --> 1\n");
     printf("Indeks Dosyasini Gostermek icin --> 2\n");
     printf("Indeks Dosyasini Silmek icin --> 3\n");
     printf("Veri Dosyasini Gostermek icin --> 4\n");
