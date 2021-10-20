@@ -42,15 +42,16 @@ int main(void)
         printf("4 | Veri Dosyasini Goster\n");
         printf("5 | Kayit Ekle\n");
         printf("6 | Kayit Ara\n");
-        printf("7 | Kayit Guncelle\n");
-        printf("8 | Kayit Sil\n");
+        printf("7 | Kayit Sil\n");
+        printf("8 | Kayit Guncelle\n");
+
         printf("\n Hangi Islemi Yapmak Istediginizi Seciniz: ");
 
         scanf("%d", &secim);
-    
+
         if (secim==1) indexDosyasiOlustur();
 
-        else if(secim==2) indexDosyasiniGoster();   
+        else if(secim==2) indexDosyasiniGoster();
 
         else if (secim==3) indeksDosyasiniSil();
 
@@ -61,7 +62,7 @@ int main(void)
         else if (secim==6)
         {
             int s_number;
-            printf("\nKaydi bulunacak ogrencinin numarasını giriniz: ");
+            printf("\nKaydi bulunacak ogrencinin numarasini giriniz: ");
             scanf("%d",&s_number);
             int *location = malloc(sizeof(int)*2);
             if(kayitBul(s_number,location) == 2) printf("\nOgrenci bulunamadi");
@@ -249,7 +250,7 @@ int veriDosyasiniGoster()
     while (!feof(file))
     {
         fscanf(file,"%d)%d)%d",&student.ogrNo,&student.dersKodu,&student.puan);
-        printf("Ogrenci No: %d Ders Kodu: %d Puanı: %d\n",student.ogrNo,student.dersKodu,student.puan);
+        printf("Ogrenci No: %d Ders Kodu: %d Puani: %d\n",student.ogrNo,student.dersKodu,student.puan);
     }
 
     fclose(file);
@@ -545,7 +546,7 @@ int kayitGuncelle(int s_number)
     fprintf(file2,"%d)%d)%d",student.ogrNo,student.dersKodu,new_point);
     if(c != EOF)
     {
-        fwrite(buffer2,end-(data[location[0]+s_number-1][1])-counter-1,1,file2); //2. kısım yazılıyor, yazılan alanın boyutu ayarlanabilir
+        fwrite(buffer2,end-(data[location[0]+s_number-1][1])-counter-5,1,file2); //2. kısım yazılıyor, yazılan alanın boyutu ayarlanabilir
     }
 
     fclose(file2);
