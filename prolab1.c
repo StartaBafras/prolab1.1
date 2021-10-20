@@ -30,75 +30,61 @@ typedef struct kayit{
 
 int main(void)
 {
-
-    while(1){
-    int secim;
-    printf("Cikis yapmak icin --> 0\n");
-    printf("Indeks Dosyasi Olusturmak icin --> 1\n");
-    printf("Indeks Dosyasini Gostermek icin --> 2\n");
-    printf("Indeks Dosyasini Silmek icin --> 3\n");
-    printf("Veri Dosyasini Gostermek icin --> 4\n");
-    printf("Kayit Eklemek icin --> 5\n");
-    printf("Kayit Bulmak icin --> 6\n");
-    printf("Kayit Guncellemek icin --> 7\n");
-    printf("Kayit Silmek icin --> 8\n");
-    printf("Hangi Islemi Yapmak Istediginizi Seciniz: ");
-    scanf("%d", &secim);
-
-    if (secim==1)
-    {
     indexDosyasiOlustur();
-    }
+    while(1)
+    {
+        int secim;
+        printf("\n");
+        printf("0 | Cikis Yap\n");
+        printf("1 | Indeks Dosyasi Olustur\n");
+        printf("2 | Indeks Dosyasini Goster\n");
+        printf("3 | Indeks Dosyasini Sil\n");
+        printf("4 | Veri Dosyasini Goster\n");
+        printf("5 | Kayit Ekle\n");
+        printf("6 | Kayit Ara\n");
+        printf("7 | Kayit Guncelle\n");
+        printf("8 | Kayit Sil\n");
+        printf("\n Hangi Islemi Yapmak Istediginizi Seciniz: ");
 
-    if (secim==2)
-    {
-    indexDosyasiniGoster();
-    }
+        scanf("%d", &secim);
+    
+        if (secim==1) indexDosyasiOlustur();
 
-    if (secim==3)
-    {
-    indeksDosyasiniSil();
-    }
+        else if(secim==2) indexDosyasiniGoster();   
 
-    if (secim==4)
-    {
-    veriDosyasiniGoster();
-    }
+        else if (secim==3) indeksDosyasiniSil();
 
-    if (secim==5)
-    {
-    kayitEkle();
-    }
+        else if (secim==4) veriDosyasiniGoster();
 
-    if (secim==6)
-    {
-    int s_number;
-    printf("Kaydi bulunacak ogrencinin numarasını giriniz: ");
-    scanf("%d",&s_number);
-    int *location = malloc(sizeof(int)*2);
-    if(kayitBul(s_number,location) == 2) printf("Ogrenci bulunamadi");
-    free(location);
-    }
+        else if (secim==5) kayitEkle();
 
-    if (secim==7)
-    {
-    int s_number;
-    printf("Kaydi silinecek ogrencinin numarasını giriniz: ");
-    scanf("%d",&s_number);
-    kayitSil(s_number);
-    }
-    if (secim==8)
-    {
-    int s_number;
-    printf("Kaydi guncellenecek ogrencinin numarasını giriniz: ");
-    scanf("%d",&s_number);
-    kayitGuncelle(s_number);
-    }
+        else if (secim==6)
+        {
+            int s_number;
+            printf("\nKaydi bulunacak ogrencinin numarasını giriniz: ");
+            scanf("%d",&s_number);
+            int *location = malloc(sizeof(int)*2);
+            if(kayitBul(s_number,location) == 2) printf("\nOgrenci bulunamadi");
+            free(location);
+        }
 
-    if (secim==0)
-    {
-        break;
-    }
+        else if (secim==7)
+        {
+            int s_number;
+            printf("\nKaydi silinecek ogrencinin numarasını giriniz: ");
+            scanf("%d",&s_number);
+            kayitSil(s_number);
+        }
+
+        else if (secim==8)
+        {
+            int s_number;
+            printf("\nKaydi guncellenecek ogrencinin numarasını giriniz: ");
+            scanf("%d",&s_number);
+            kayitGuncelle(s_number);
+        }
+
+        else if (secim==0) break;
 
     }
 }
@@ -128,8 +114,6 @@ int indexDosyasiniGoster()
 
 int indexDosyasiOlustur()
 {
-
-
 
     FILE *file = fopen("students.bin","rb");
 
