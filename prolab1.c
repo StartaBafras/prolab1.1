@@ -69,7 +69,7 @@ int main(void)
     if (secim==5)
     {
     int s_number;
-    printf("Kaydi silinecek ogrencinin numarasını giriniz: ");
+    printf("Kaydi bulunacak ogrencinin numarasını giriniz: ");
     scanf("%d",&s_number);
     int *location = malloc(sizeof(int)*2);
     if(kayitBul(s_number,location) == 2) printf("Ogrenci bulunamadi");
