@@ -72,7 +72,7 @@ int main(void)
         else if (secim==7)
         {
             int s_number;
-            printf("\nKaydi silinecek ogrencinin numarasını giriniz: ");
+            printf("\nKaydi silinecek ogrencinin numarasini giriniz: ");
             scanf("%d",&s_number);
             kayitSil(s_number);
         }
@@ -80,7 +80,7 @@ int main(void)
         else if (secim==8)
         {
             int s_number;
-            printf("\nKaydi guncellenecek ogrencinin numarasını giriniz: ");
+            printf("\nKaydi guncellenecek ogrencinin numarasini giriniz: ");
             scanf("%d",&s_number);
             kayitGuncelle(s_number);
         }
