@@ -65,7 +65,7 @@ int main(void)
             printf("\nKaydi bulunacak ogrencinin numarasini giriniz: ");
             scanf("%d",&s_number);
             int *location = malloc(sizeof(int)*2);
-            if(kayitBul(s_number,location) == 2) printf("\nOgrenci bulunamadi");
+            if(kayitBul(s_number,location) == 2) printf("\nOgrenci bulunamadi\n");
             free(location);
         }
 
@@ -419,7 +419,7 @@ int kayitSil(int s_number)
 
     if(!((location[0] + s_number - 1) <= location[1] && (location[0] + s_number - 1) >= location[0])) // Aralıkta olmalı
     {
-        printf("Hatali index secimi");
+        printf("Hatali index secimi\n");
         return 3;
     }
 
@@ -504,7 +504,7 @@ int kayitGuncelle(int s_number)
 
     if(!((location[0] + s_number - 1) <= location[1] && (location[0] + s_number - 1) >= location[0])) // Aralıkta olmalı
     {
-        printf("Hatali index secimi");
+        printf("Hatali index secimi\n");
         return 3;
     }
 
