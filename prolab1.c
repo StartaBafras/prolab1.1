@@ -419,7 +419,7 @@ int kayitSil(int s_number)
 
     if(!((location[0] + s_number - 1) <= location[1] && (location[0] + s_number - 1) >= location[0])) // Aralıkta olmalı
     {
-        printf("Hatalı index seçimi");
+        printf("Hatali index secimi");
         return 3;
     }
 
@@ -458,10 +458,10 @@ int kayitSil(int s_number)
         fwrite(buffer2,end-counter-(data[location[0]+s_number-1][1]+1),1,file3); //2. kısım yazılıyor
 
     }
-
+    fclose(file2);
+    fclose(file3);
     remove("students.bin");
     rename("tmp.bin","students.bin");
-    fclose(file3);
     indexDosyasiOlustur();
 
 
@@ -504,7 +504,7 @@ int kayitGuncelle(int s_number)
 
     if(!((location[0] + s_number - 1) <= location[1] && (location[0] + s_number - 1) >= location[0])) // Aralıkta olmalı
     {
-        printf("Hatalı index seçimi");
+        printf("Hatali index secimi");
         return 3;
     }
 
