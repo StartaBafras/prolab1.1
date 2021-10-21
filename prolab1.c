@@ -544,13 +544,13 @@ int kayitGuncelle(int s_number)
     fseek(file2,(data[location[0]+s_number-1][1]+1),SEEK_SET);
 
 
-    if(student.puan >=10 && s_number <=9) fprintf(file2,"%d)%d)%d%d",student.ogrNo,student.dersKodu,0,new_point);//Tek basamak hatasının çözümü
+    if(student.puan >=10 && new_point <=9) fprintf(file2,"%d)%d)%d%d",student.ogrNo,student.dersKodu,0,new_point);//Tek basamak hatasının çözümü
 
     else fprintf(file2,"%d)%d)%d",student.ogrNo,student.dersKodu,new_point);
 
     if(c != EOF)
     {
-        fwrite(buffer2,end-(data[location[0]+s_number-1][1])-counter-5,1,file2); //2. kısım yazılıyor, yazılan alanın boyutu ayarlanabilir
+        fwrite(buffer2,end-(data[location[0]+s_number-1][1])-counter-4,1,file2); //2. kısım yazılıyor, yazılan alanın boyutu ayarlanabilir
     }
 
     fclose(file2);
